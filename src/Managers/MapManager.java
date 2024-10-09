@@ -8,11 +8,14 @@ public class MapManager {
 
     PlayerManager playerManager;
     BlockManager blockManager;
+    Renderer renderer;
     public MovementManager movementManager;
 
-    public MapManager(PlayerManager playerManager, BlockManager blockManager){
+
+    public MapManager(PlayerManager playerManager, BlockManager blockManager, Renderer renderer){
         this.playerManager = playerManager;
         this.blockManager = blockManager;
+        this.renderer = renderer;
     }
 
     private final int MAP_HEIGHT = 10;
@@ -44,11 +47,12 @@ public class MapManager {
     }
 
     public void drawMap(){
+        renderer.clearGrid();
         for(int i = 0; i < MAP_HEIGHT; i++){
             for(int j = 0;j < MAP_WIDTH; j++){
-                System.out.print(grid[i][j].getTexture());
+                renderer.updateGrid(String.valueOf(grid[i][j].getTexture()));
             }
-            System.out.println();
+            renderer.updateGrid("<br/>");
         }
     }
 

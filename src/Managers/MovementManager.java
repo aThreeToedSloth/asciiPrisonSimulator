@@ -26,28 +26,40 @@ public class MovementManager {
     public void playerMove(Controls controls){
         switch (controls){
             case UP:
-                if (!(mapManager.getGrid())[playerH - 1][playerL].getCollision()) {
+                if ((mapManager.getGrid())[playerH - 1][playerL].getCollision()) {
+                    System.out.println("You are trying to run into a " + (mapManager.getGrid())[playerH - 1][playerL].getName() + ". You can't do that!");
+                }
+                else{
                     (mapManager.getGrid())[playerH][playerL] = temp;
                     temp = (mapManager.getGrid())[playerH - 1][playerL];
                     mapManager.spawnPlayer(playerManager.getPlayer(), playerH - 1, playerL);
                 }
                 break;
             case DOWN:
-                if (!(mapManager.getGrid())[playerH + 1][playerL].getCollision()) {
+                if ((mapManager.getGrid())[playerH + 1][playerL].getCollision()) {
+                    System.out.println("You are trying to run into a " + (mapManager.getGrid())[playerH + 1][playerL].getName() + ". You can't do that!");
+                }
+                else{
                     (mapManager.getGrid())[playerH][playerL] = temp;
                     temp = (mapManager.getGrid())[playerH + 1][playerL];
                     mapManager.spawnPlayer(playerManager.getPlayer(), playerH + 1, playerL);
                 }
                 break;
             case LEFT:
-                if (!(mapManager.getGrid())[playerH][playerL - 1].getCollision()) {
+                if ((mapManager.getGrid())[playerH][playerL - 1].getCollision()) {
+                    System.out.println("You are trying to run into a " + (mapManager.getGrid())[playerH][playerL - 1].getName() + ". You can't do that!");
+                }
+                else{
                     (mapManager.getGrid())[playerH][playerL] = temp;
                     temp = (mapManager.getGrid())[playerH][playerL - 1];
                     mapManager.spawnPlayer(playerManager.getPlayer(), playerH, playerL - 1);
                 }
                 break;
             case RIGHT:
-                if (!(mapManager.getGrid())[playerH][playerL + 1].getCollision()) {
+                if ((mapManager.getGrid())[playerH][playerL + 1].getCollision()) {
+                    System.out.println("You are trying to run into a " + (mapManager.getGrid())[playerH][playerL + 1].getName() + ". You can't do that!");
+                }
+                else {
                     (mapManager.getGrid())[playerH][playerL] = temp;
                     temp = (mapManager.getGrid())[playerH][playerL + 1];
                     mapManager.spawnPlayer(playerManager.getPlayer(), playerH, playerL + 1);

@@ -1,25 +1,28 @@
-import Managers.BlockManager;
-import Managers.Controls;
-import Managers.MapManager;
-import Managers.PlayerManager;
+import Managers.*;
+import Managers.Renderer;
 
 import java.util.Scanner;
 
 public class Main {
 
-    static PlayerManager playerManager;
-    static BlockManager blockManager;
-    static MapManager mapManager;
+
     public static void main(String[] args) {
-        initializeManagers();
-        createMap();
-        gameLoop();
+        Renderer renderer = new Renderer();
+        renderer.render();
+        PlayerManager playerManager = new PlayerManager();
+        BlockManager blockManager = new BlockManager();
+        MapManager mapManager = new MapManager(playerManager, blockManager, renderer);
+
+
+        setup(playerManager, blockManager, mapManager);
+        createMap(playerManager, blockManager, mapManager);
+
+        gameLoop(playerManager, blockManager, mapManager);
+
+
     }
 
-    public static void initializeManagers(){
-        playerManager = new PlayerManager();
-        blockManager = new BlockManager();
-        mapManager = new MapManager(playerManager, blockManager);
+    public static void setup(PlayerManager playerManager, BlockManager blockManager, MapManager mapManager){
 
         blockManager.initializeBlocks();
         playerManager.initializePlayer();
@@ -28,7 +31,7 @@ public class Main {
 
     }
 
-    public static void createMap(){
+    public static void createMap(PlayerManager playerManager, BlockManager blockManager, MapManager mapManager){
 
         mapManager.placeFlooring(blockManager.getFloor());
         mapManager.placeOuterWalls(blockManager.getWall());
@@ -36,7 +39,7 @@ public class Main {
         mapManager.drawMap();
     }
 
-    public static void gameLoop(){
+    public static void gameLoop(PlayerManager playerManager, BlockManager blockManager, MapManager mapManager){
         Scanner scanner = new Scanner(System.in);
         String key = "";
         while(!key.equals("q")){

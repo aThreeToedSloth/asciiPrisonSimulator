@@ -1,25 +1,43 @@
 import Managers.*;
 import Managers.Renderer;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Scanner;
 
 public class Main {
 
+    static PlayerManager playerManager;
+    static BlockManager blockManager;
+    static MapManager mapManager;
+
+    static KeyListener listener = new KeyListener() {
+        @Override
+        public void keyTyped(KeyEvent keyEvent) {
+            gameLoop(playerManager, blockManager, mapManager, keyEvent);
+        }
+
+        @Override
+        public void keyPressed(KeyEvent keyEvent) {
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent keyEvent) {
+
+        }
+    };
 
     public static void main(String[] args) {
-        Renderer renderer = new Renderer();
+        Renderer renderer = new Renderer(listener);
         renderer.render();
-        PlayerManager playerManager = new PlayerManager();
-        BlockManager blockManager = new BlockManager();
-        MapManager mapManager = new MapManager(playerManager, blockManager, renderer);
+        playerManager = new PlayerManager();
+        blockManager = new BlockManager();
+        mapManager = new MapManager(playerManager, blockManager, renderer);
 
 
         setup(playerManager, blockManager, mapManager);
         createMap(playerManager, blockManager, mapManager);
-
-        gameLoop(playerManager, blockManager, mapManager);
-
-
     }
 
     public static void setup(PlayerManager playerManager, BlockManager blockManager, MapManager mapManager){
@@ -39,28 +57,21 @@ public class Main {
         mapManager.drawMap();
     }
 
-    public static void gameLoop(PlayerManager playerManager, BlockManager blockManager, MapManager mapManager){
-        Scanner scanner = new Scanner(System.in);
-        String key = "";
-        while(!key.equals("q")){
-            key = scanner.next();
-
-            switch (key){
-                case "w":
-                    mapManager.movementManager.playerMove(Controls.UP);
-                    break;
-                case "a":
-                    mapManager.movementManager.playerMove(Controls.LEFT);
-                    break;
-                case "s":
-                    mapManager.movementManager.playerMove(Controls.DOWN);
-                    break;
-                case "d":
-                    mapManager.movementManager.playerMove(Controls.RIGHT);
-                    break;
-            }
-            mapManager.drawMap();
-
+    public static void gameLoop(PlayerManager playerManager, BlockManager blockManager, MapManager mapManager, KeyEvent e){
+        switch (e.getKeyChar()){
+            case 'w':
+                mapManager.movementManager.playerMove(Controls.UP);
+                break;
+            case 'a':
+                mapManager.movementManager.playerMove(Controls.LEFT);
+                break;
+            case 's':
+                mapManager.movementManager.playerMove(Controls.DOWN);
+                break;
+            case 'd':
+                mapManager.movementManager.playerMove(Controls.RIGHT);
+                break;
         }
+        mapManager.drawMap();
     }
 }

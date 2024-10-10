@@ -24,7 +24,7 @@ public class MapManager {
     private Entity[][] grid = new Entity[MAP_HEIGHT][MAP_WIDTH];
 
     public void setup(){
-        movementManager = new MovementManager(this, playerManager, blockManager);
+        movementManager = new MovementManager(this, playerManager, blockManager, renderer);
         movementManager.setup();
     }
 

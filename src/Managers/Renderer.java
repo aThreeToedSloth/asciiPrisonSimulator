@@ -1,12 +1,20 @@
 package Managers;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Renderer {
+public class Renderer{
     private JFrame frame;
     private JLabel grid;
+    private JLabel textBox;
     private JPanel panel;
     StringBuilder oldText = new StringBuilder();
+    private KeyListener listener;
+
+    public Renderer(KeyListener listener){
+        this.listener = listener;
+    }
 
     public void render(){
         createFrame();
@@ -17,10 +25,18 @@ public class Renderer {
         frame.setSize(400,400);
         frame.setVisible(true);
 
-        grid = new JLabel();
         panel = new JPanel();
+
+        grid = new JLabel();
         panel.add(grid);
+
+        textBox = new JLabel();
+        panel.add(textBox);
+
         frame.add(panel);
+
+        grid.setFocusable(true);
+        grid.addKeyListener(listener);
 
         grid.setText("");
     }
@@ -33,5 +49,9 @@ public class Renderer {
 
     public void clearGrid(){
         oldText.setLength(0);
+    }
+
+    public void displayText(String text){
+        textBox.setText(text);
     }
 }

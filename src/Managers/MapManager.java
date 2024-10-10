@@ -56,9 +56,10 @@ public class MapManager {
         }
     }
 
-    public void spawnPlayer(Player player, int h, int l){
+    public Player spawnPlayer(Player player, int h, int l){
         grid[h][l] = player;
-        movementManager.setPlayerCoords(h,l);
+        playerManager.setPlayerCoords(player, h, l);
+        return player;
     }
 
     public Entity[][] getGrid(){

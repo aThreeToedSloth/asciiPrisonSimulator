@@ -1,9 +1,9 @@
+import Entities.Player;
 import Managers.*;
 import Managers.Renderer;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Scanner;
 
 public class Main {
 
@@ -14,7 +14,7 @@ public class Main {
     static KeyListener listener = new KeyListener() {
         @Override
         public void keyTyped(KeyEvent keyEvent) {
-            gameLoop(playerManager, blockManager, mapManager, keyEvent);
+            gameLoop(mapManager, keyEvent, playerManager.getPlayer());
         }
 
         @Override
@@ -57,19 +57,19 @@ public class Main {
         mapManager.drawMap();
     }
 
-    public static void gameLoop(PlayerManager playerManager, BlockManager blockManager, MapManager mapManager, KeyEvent e){
+    public static void gameLoop(MapManager mapManager, KeyEvent e, Player p){
         switch (e.getKeyChar()){
             case 'w':
-                mapManager.movementManager.playerMove(Controls.UP);
+                mapManager.movementManager.playerMove(Controls.UP, p);
                 break;
             case 'a':
-                mapManager.movementManager.playerMove(Controls.LEFT);
+                mapManager.movementManager.playerMove(Controls.LEFT, p);
                 break;
             case 's':
-                mapManager.movementManager.playerMove(Controls.DOWN);
+                mapManager.movementManager.playerMove(Controls.DOWN, p);
                 break;
             case 'd':
-                mapManager.movementManager.playerMove(Controls.RIGHT);
+                mapManager.movementManager.playerMove(Controls.RIGHT, p);
                 break;
         }
         mapManager.drawMap();

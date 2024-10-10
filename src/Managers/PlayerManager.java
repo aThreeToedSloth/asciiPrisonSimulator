@@ -20,6 +20,11 @@ public class PlayerManager {
         return  player;
     }
 
+    public void setPlayerCoords(Player player, int coordH, int coordL){
+        player.setCoordH(coordH);
+        player.setCoordL(coordL);
+    }
+
     public Player getPlayer(){
         return this.player;
     }

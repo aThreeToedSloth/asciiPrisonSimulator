@@ -39,6 +39,7 @@ public class Renderer{
         grid.addKeyListener(listener);
 
         grid.setText("");
+        textBox.setText("<html>You are in prison :(<br/>Use WASD to move around </html>");
     }
 
     public void updateGrid(String text){

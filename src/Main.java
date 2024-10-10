@@ -33,7 +33,7 @@ public class Main {
         Renderer renderer = new Renderer(listener);
         renderer.render();
         playerManager = new PlayerManager();
-        blockManager = new BlockManager();
+        blockManager = new BlockManager(renderer, playerManager);
         mapManager = new MapManager(playerManager, blockManager, renderer);
 
 
@@ -54,6 +54,8 @@ public class Main {
 
         mapManager.placeFlooring(blockManager.getFloor());
         mapManager.placeOuterWalls(blockManager.getWall());
+        mapManager.placeMetalBars();
+        mapManager.placeFire(1,8);
         mapManager.spawnPlayer(playerManager.getPlayer(), 5, 5);
         mapManager.drawMap();
     }

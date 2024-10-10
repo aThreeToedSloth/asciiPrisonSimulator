@@ -28,6 +28,7 @@ public class Renderer{
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
+        frame.setTitle("Prison Simulator");
 
         grid = new JLabel();
         grid.setHorizontalAlignment(JLabel.CENTER);

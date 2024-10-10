@@ -20,6 +20,12 @@ public class PlayerManager {
         return  player;
     }
 
+    public void updatePlayer(Player p, char texture, boolean collision, boolean controllable){
+        p.setTexture(texture);
+        p.setCollision(collision);
+        p.setControllable(controllable);
+    }
+
     public void setPlayerCoords(Player player, int coordH, int coordL){
         player.setCoordH(coordH);
         player.setCoordL(coordL);

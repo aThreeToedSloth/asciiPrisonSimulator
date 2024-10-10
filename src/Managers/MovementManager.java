@@ -1,5 +1,7 @@
 package Managers;
 
+import Entities.Block;
+import Entities.DeathBlock;
 import Entities.Entity;
 import Entities.Player;
 
@@ -24,6 +26,9 @@ public class MovementManager {
     }
 
     public void playerMove(Controls controls, Player player){
+        if(!player.getControllable()){
+            return;
+        }
         switch (controls){
             case UP:
                 if ((mapManager.getGrid())[player.getCoordH() - 1][player.getCoordL()].getCollision()) {
@@ -33,6 +38,7 @@ public class MovementManager {
                     (mapManager.getGrid())[player.getCoordH()][player.getCoordL()] = temp;
                     temp = (mapManager.getGrid())[player.getCoordH() - 1][player.getCoordL()];
                     mapManager.spawnPlayer(player, player.getCoordH() - 1, player.getCoordL());
+                    renderer.displayText("");
                 }
                 break;
             case DOWN:
@@ -43,6 +49,7 @@ public class MovementManager {
                     (mapManager.getGrid())[player.getCoordH()][player.getCoordL()] = temp;
                     temp = (mapManager.getGrid())[player.getCoordH() + 1][player.getCoordL()];
                     mapManager.spawnPlayer(player, player.getCoordH() + 1, player.getCoordL());
+                    renderer.displayText("");
                 }
                 break;
             case LEFT:
@@ -53,6 +60,7 @@ public class MovementManager {
                     (mapManager.getGrid())[player.getCoordH()][player.getCoordL()] = temp;
                     temp = (mapManager.getGrid())[player.getCoordH()][player.getCoordL() - 1];
                     mapManager.spawnPlayer(player, player.getCoordH(), player.getCoordL() - 1);
+                    renderer.displayText("");
                 }
                 break;
             case RIGHT:
@@ -63,8 +71,12 @@ public class MovementManager {
                     (mapManager.getGrid())[player.getCoordH()][player.getCoordL()] = temp;
                     temp = (mapManager.getGrid())[player.getCoordH()][player.getCoordL() + 1];
                     mapManager.spawnPlayer(player, player.getCoordH(), player.getCoordL()+ 1);
+                    renderer.displayText("");
                 }
                 break;
+        }
+        if(temp instanceof DeathBlock){
+            ((DeathBlock) temp).onTouch(player ,"You walked into a fireplace and died - Game Over");
         }
     }
 

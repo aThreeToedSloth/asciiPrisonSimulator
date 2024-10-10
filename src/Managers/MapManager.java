@@ -46,6 +46,16 @@ public class MapManager {
         }
     }
 
+    public  void placeMetalBars(){
+        for(int i = 0; i < MAP_WIDTH; i++){
+            grid[MAP_HEIGHT - 1][i] = blockManager.getMetalBar();
+        }
+    }
+
+    public void placeFire(int h, int l){
+        grid[h][l] = blockManager.getFire();
+    }
+
     public void drawMap(){
         renderer.clearGrid();
         for(int i = 0; i < MAP_HEIGHT; i++){

@@ -29,6 +29,7 @@ public class Main {
     };
 
     public static void main(String[] args) {
+
         Renderer renderer = new Renderer(listener);
         renderer.render();
         playerManager = new PlayerManager();

@@ -2,7 +2,6 @@ package Managers;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Renderer{
@@ -33,7 +32,7 @@ public class Renderer{
         grid = new JLabel();
         grid.setHorizontalAlignment(JLabel.CENTER);
         grid.setVerticalAlignment(JLabel.CENTER);
-        grid.setFont(new Font("serif", Font.PLAIN, 20));
+        grid.setFont(new Font("Monospaced", Font.PLAIN, 15));
         panel.setBounds(0,30,400,250);
         panel.setLayout(new BorderLayout());
         panel.add(grid);
@@ -41,7 +40,7 @@ public class Renderer{
         textBox = new JLabel();
         textBox.setHorizontalAlignment(JLabel.CENTER);
         textBox.setVerticalAlignment(JLabel.CENTER);
-        textBox.setFont(new Font("serif", Font.PLAIN, 10));
+        textBox.setFont(new Font("Monospaced", Font.PLAIN, 10));
         panel1.setBounds(0,250,400,150);
         panel1.setLayout(new BorderLayout());
         panel1.add(textBox);
@@ -59,7 +58,7 @@ public class Renderer{
     public void updateGrid(String text){
 
         oldText.append(text);
-        grid.setText(String.format("<html><pre>%s</pre></html>",oldText));
+        grid.setText(String.format("<html>%s</html>",oldText));
     }
 
     public void clearGrid(){

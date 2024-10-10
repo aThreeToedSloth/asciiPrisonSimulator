@@ -27,7 +27,7 @@ public class MovementManager {
         switch (controls){
             case UP:
                 if ((mapManager.getGrid())[player.getCoordH() - 1][player.getCoordL()].getCollision()) {
-                    renderer.displayText("You are trying to run into a " + (mapManager.getGrid())[player.getCoordH() - 1][player.getCoordL()].getName() + ". You can't do that!");
+                    renderer.displayText(warningMessage((mapManager.getGrid())[player.getCoordH() - 1][player.getCoordL()].getName()));
                 }
                 else{
                     (mapManager.getGrid())[player.getCoordH()][player.getCoordL()] = temp;
@@ -37,7 +37,7 @@ public class MovementManager {
                 break;
             case DOWN:
                 if ((mapManager.getGrid())[player.getCoordH() + 1][player.getCoordL()].getCollision()) {
-                    renderer.displayText("You are trying to run into a " + (mapManager.getGrid())[player.getCoordH() + 1][player.getCoordL()].getName() + ". You can't do that!");
+                    renderer.displayText(warningMessage((mapManager.getGrid())[player.getCoordH() + 1][player.getCoordL()].getName()));
                 }
                 else{
                     (mapManager.getGrid())[player.getCoordH()][player.getCoordL()] = temp;
@@ -47,7 +47,7 @@ public class MovementManager {
                 break;
             case LEFT:
                 if ((mapManager.getGrid())[player.getCoordH()][player.getCoordL() - 1].getCollision()) {
-                    renderer.displayText("You are trying to run into a " + (mapManager.getGrid())[player.getCoordH()][player.getCoordL() - 1].getName() + ". You can't do that!");
+                    renderer.displayText(warningMessage((mapManager.getGrid())[player.getCoordH()][player.getCoordL() - 1].getName()));
                 }
                 else{
                     (mapManager.getGrid())[player.getCoordH()][player.getCoordL()] = temp;
@@ -57,7 +57,7 @@ public class MovementManager {
                 break;
             case RIGHT:
                 if ((mapManager.getGrid())[player.getCoordH()][player.getCoordL() + 1].getCollision()) {
-                    renderer.displayText("You are trying to run into a " + (mapManager.getGrid())[player.getCoordH()][player.getCoordL() + 1].getName() + ". You can't do that!");
+                    renderer.displayText(warningMessage((mapManager.getGrid())[player.getCoordH()][player.getCoordL() + 1].getName()));
                 }
                 else {
                     (mapManager.getGrid())[player.getCoordH()][player.getCoordL()] = temp;
@@ -66,5 +66,9 @@ public class MovementManager {
                 }
                 break;
         }
+    }
+
+    private String warningMessage(String entity){
+        return String.format("<html>You are trying to run into a %s. You can't do that!</html>", entity);
     }
 }

@@ -1,14 +1,13 @@
 package Managers;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Renderer{
-    private JFrame frame;
     private JLabel grid;
     private JLabel textBox;
-    private JPanel panel;
     StringBuilder oldText = new StringBuilder();
     private KeyListener listener;
 
@@ -21,25 +20,40 @@ public class Renderer{
     }
 
     private void createFrame(){
-        frame = new JFrame();
+        JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+        JPanel panel1 = new JPanel();
+
         frame.setSize(400,400);
         frame.setVisible(true);
-
-        panel = new JPanel();
+        frame.setLayout(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
 
         grid = new JLabel();
+        grid.setHorizontalAlignment(JLabel.CENTER);
+        grid.setVerticalAlignment(JLabel.CENTER);
+        grid.setFont(new Font("serif", Font.PLAIN, 20));
+        panel.setBounds(0,30,400,250);
+        panel.setLayout(new BorderLayout());
         panel.add(grid);
 
         textBox = new JLabel();
-        panel.add(textBox);
+        textBox.setHorizontalAlignment(JLabel.CENTER);
+        textBox.setVerticalAlignment(JLabel.CENTER);
+        textBox.setFont(new Font("serif", Font.PLAIN, 10));
+        panel1.setBounds(0,250,400,150);
+        panel1.setLayout(new BorderLayout());
+        panel1.add(textBox);
 
         frame.add(panel);
+        frame.add(panel1);
 
         grid.setFocusable(true);
         grid.addKeyListener(listener);
 
         grid.setText("");
-        textBox.setText("<html>You are in prison :(<br/>Use WASD to move around </html>");
+        textBox.setText("<html>You are in prison - use WASD to move around.</html>");
     }
 
     public void updateGrid(String text){

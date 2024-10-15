@@ -14,11 +14,8 @@ public class Renderer{
         this.listener = listener;
     }
 
-    public void render(){
-        createFrame();
-    }
-
-    private void createFrame(){
+    //Creates and set up a Java Swing window.
+    public void createFrame(){
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
         JPanel panel1 = new JPanel();
@@ -56,16 +53,18 @@ public class Renderer{
         textBox.setText("<html>You are in prison - use WASD to move around.</html>");
     }
 
+    //Draws text onto the grid
     public void updateGrid(String text){
-
         oldText.append(text);
         grid.setText(String.format("<html>%s</html>",oldText));
     }
 
+    //Clears the text in the string builder that visually represents the grid
     public void clearGrid(){
         oldText.setLength(0);
     }
 
+    //Writes something in the textbox
     public void displayText(String text){
         textBox.setText(text);
     }

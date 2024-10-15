@@ -1,6 +1,5 @@
 package Managers;
 
-import Entities.Block;
 import Entities.DeathBlock;
 import Entities.Entity;
 import Entities.Player;
@@ -21,11 +20,16 @@ public class MovementManager {
         this.renderer = renderer;
     }
 
+    //Assumes that when the game starts, the player is standing on a floor block
     public void setup(){
         temp = blockManager.getFloor();
     }
 
+    //Moves the player's position on the grid
+    //If the player tries to walk into an entity with collision, they don't move and a warning message is sent
+    //If the player walks into an entity without collision, it replaces it's position on the grid and the entity is placed in the temp variable.
     public void playerMove(Controls controls, Player player){
+        //Ensure that the player is allowed to be controlled before controlling them.
         if(!player.getControllable()){
             return;
         }
@@ -75,6 +79,7 @@ public class MovementManager {
                 }
                 break;
         }
+        //The player can walk onto the fireplace, but they will die.
         if(temp instanceof DeathBlock){
             ((DeathBlock) temp).onTouch(player ,"You walked into a fireplace and died - Game Over");
         }

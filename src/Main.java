@@ -7,12 +7,12 @@ import java.awt.event.KeyListener;
 
 public class Main {
 
-    static PlayerManager playerManager;
-    static BlockManager blockManager;
-    static MapManager mapManager;
+    PlayerManager playerManager;
+    BlockManager blockManager;
+    MapManager mapManager;
 
     //Listens for key presses, puts it into the gameLoop method as an argument.
-    static KeyListener listener = new KeyListener() {
+    KeyListener listener = new KeyListener() {
         @Override
         public void keyTyped(KeyEvent keyEvent) {
             gameLoop(mapManager, keyEvent, playerManager.getPlayer());
@@ -31,6 +31,13 @@ public class Main {
 
     //Initialises a number of managers, then calls methods to set up the game.
     public static void main(String[] args) {
+        Main main = new Main();
+
+        main.setup();
+    }
+
+    //Calls methods in the Block and Player managers to initialise entities.
+    public void setup(){
 
         Renderer renderer = new Renderer(listener);
         renderer.createFrame();
@@ -38,22 +45,17 @@ public class Main {
         blockManager = new BlockManager(renderer, playerManager);
         mapManager = new MapManager(playerManager, blockManager, renderer);
 
-        setup(playerManager, blockManager, mapManager);
-        createMap(playerManager, blockManager, mapManager);
-    }
-
-    //Calls methods in the Block and Player managers to initialise entities.
-    public static void setup(PlayerManager playerManager, BlockManager blockManager, MapManager mapManager){
-
         blockManager.initializeBlocks();
         playerManager.initializePlayer();
+
+        createMap(playerManager, blockManager, mapManager);
 
         mapManager.setup();
 
     }
 
     //Calls methods from the Map manager to build the map.
-    public static void createMap(PlayerManager playerManager, BlockManager blockManager, MapManager mapManager){
+    public void createMap(PlayerManager playerManager, BlockManager blockManager, MapManager mapManager){
         mapManager.placeFlooring(blockManager.getFloor());
         mapManager.placeOuterWalls(blockManager.getWall());
         mapManager.placeMetalBars();
@@ -64,7 +66,7 @@ public class Main {
 
     //Decides what to do when certain keys are pressed. Uses the Movement manager.
     //Redraws the grid after the player moves.
-    public static void gameLoop(MapManager mapManager, KeyEvent e, Player p){
+    public void gameLoop(MapManager mapManager, KeyEvent e, Player p){
         switch (e.getKeyChar()){
             case 'w':
                 mapManager.movementManager.playerMove(Controls.UP, p);
